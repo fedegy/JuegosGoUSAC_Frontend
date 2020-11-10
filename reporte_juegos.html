@@ -23,6 +23,7 @@
 					<ul>
 						<li><a href="catalogojuegos.html">Catálogo de Videojuegos</a></li>
 						<li><a href="busqueda_realizada.html">Buscar</a></li>
+						<li><a href="biblioteca.html">Biblioteca</a></li>
 						<li><a href="cargamasiva.html">Carga Masiva</a></li>
                         <li><a href="crud_videojuegos.html">CRUD de Videojuegos</a></li>
                         <li><a href="reportes.html">Reportes</a></li>
@@ -95,30 +96,47 @@
             .catch(error => {
             console.log(error)
             })
-            .then(juegos=> {
-            for (var i in juegos) {
-                console.log(juegos[i])
+            .then(juegos_rep=> {
+            for (var i in juegos_rep) {
+                console.log(juegos_rep[i])
                 contenido.innerHTML += 
                 `<tr>
-				<td>${juegos[i].id}</td>
-                <td>${juegos[i].nombre_juego}</td>
-                <td>${juegos[i].anio}</td>
-                <td>${juegos[i].precio}</td>
-                <td>${juegos[i].categoria1}</td>
-				<td>${juegos[i].categoria2}</td>
-				<td>${juegos[i].categoria3}</td>
-				<td>${juegos[i].imagen}</td>
-				<td>${juegos[i].baner}</td>
-				<td>${juegos[i].desc}</td>
+				<td>${juegos_rep[i].id}</td>
+                <td>${juegos_rep[i].nombre_juego}</td>
+                <td>${juegos_rep[i].anio}</td>
+                <td>${juegos_rep[i].precio}</td>
+                <td>${juegos_rep[i].categoria1}</td>
+				<td>${juegos_rep[i].categoria2}</td>
+				<td>${juegos_rep[i].categoria3}</td>
+				<td>${juegos_rep[i].imagen}</td>
+				<td>${juegos_rep[i].baner}</td>
+				<td>${juegos_rep[i].desc}</td>
                 </tr>`
             }
             })
 		}
+		function pdf(){
+			var pdf = new jsPDF('p', 'pt', 'letter');
+		var canvas = pdf.canvas;
+		
+        html2pdf(document.getElementById("reportes_juegos"), pdf, function(pdf) {
+                var iframe = document.createElement('iframe');
+                iframe.setAttribute('style','position:absolute;right:0; top:100; bottom:0; height:100%; width:1000px');
+                document.body.appendChild(iframe);
+                iframe.src = pdf.output('datauristring');
 
+            
+			
+				var div = document.createElement('pre');
+				div.innerText=pdf.output();
+				document.body.appendChild(div);
+            }	
+        );
+		}
 		function GenerarReporte(){
 			var tabla=document.getElementById('tabla_reporteJuegos');
 			var contenido_juegos={
-				margin:[3,4,0,0]
+				margin:[3,4,0,0],
 				filename: 'Reporte_Juegos.pdf',
 				pagebreak:{mode:['css','legacy']},
 				image:{type: 'jpeg',quality:0.98},
