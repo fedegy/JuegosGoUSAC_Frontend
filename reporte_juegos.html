@@ -23,7 +23,6 @@
 					<ul>
 						<li><a href="catalogojuegos.html">Catálogo de Videojuegos</a></li>
 						<li><a href="busqueda_realizada.html">Buscar</a></li>
-						<li><a href="biblioteca.html">Biblioteca</a></li>
 						<li><a href="cargamasiva.html">Carga Masiva</a></li>
                         <li><a href="crud_videojuegos.html">CRUD de Videojuegos</a></li>
                         <li><a href="reportes.html">Reportes</a></li>
@@ -51,7 +50,6 @@
 								<th>Categoria 2</th>
 								<th>Categoria 3</th>
 								<th class="foto_">Foto</th>
-								<th>Banner</th>
 								<th>Descripción</th>
 								</tr>
 							</thead>
@@ -109,8 +107,7 @@
 				<td>${juegos[i].categoria2}</td>
 				<td>${juegos[i].categoria3}</td>
 				<td>${juegos[i].imagen}</td>
-				<td>${juegos[i].baner}</td>
-				<td>${juegosi].desc}</td>
+				<td>${juegos[i].desc}</td>
                 </tr>`
             }
             })
@@ -136,7 +133,7 @@
 		function GenerarReporte(){
 			var tabla=document.getElementById('tabla_reporteJuegos');
 			var contenido_juegos={
-				margin:0.5,
+				margin:[3,4,0,0]
 				filename: 'Reporte_Juegos.pdf',
 				pagebreak:{mode:['css','legacy']},
 				image:{type: 'jpeg',quality:0.98},
