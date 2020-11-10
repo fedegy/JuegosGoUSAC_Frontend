@@ -88,7 +88,7 @@
 			</footer>
 			<script>
 				function Tabla_juegos(){
-            var contenido = document.querySelector('#tabla_juegos') 
+            var contenido = document.querySelector('#tabla_reporteJuegos') 
             contenido.innerHTML = ""
             fetch('https://juegosgousac-backend.herokuapp.com/cargar_listajuegos')
             .then(response => response.json())
