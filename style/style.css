@@ -1,0 +1,318 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+}
+
+body{
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 30px;
+    color: #777;
+    background: darkgray;
+    width: 100%;
+}
+
+.contenido{
+    max-width: 450px;
+    margin: 0 auto;
+    position: relative;
+}
+#caja{
+    background: white;
+    padding: 40px;
+    margin: 200px 0;
+}
+
+#caja h3{
+    color: white;
+    display: block;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 10px;
+    margin-left: 60px;
+}
+
+.texts{
+    border: medium none !important;
+    margin: 0 0 10px;
+    min-width: 100%;
+    padding: 0;
+    width: 100%;
+    
+}
+.registro{
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+    font-size: 14px;
+    border:medium none !important;
+    margin: 0 0 10px;
+    min-width: 100%;
+    padding: 0;
+    width: 100%;
+}
+
+
+#caja textarea{
+    height: 100px;
+    max-width: 100%;
+    resize: none;
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+}
+#caja input{
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    color: #444343;
+    padding: 20px 30px 10px 10px;
+    margin: 0;
+    border: none;
+    border-bottom: 2px solid #cecfd3;
+    -webkit-appearance: none;
+    margin-bottom:5px;
+    
+}
+
+#caja input:hover{
+    border-bottom: 2px solid #27ae60 ;
+	transition: 0.5s all ease;
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+    
+}
+
+.botonlogin {
+    cursor: pointer;
+    margin: 0 0 5px;
+    width: 100%;
+    font-size: 18px;
+    color: white;
+    background:#f39c12;
+    outline: none; 
+    padding: 6px 13px;
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    
+}
+.botonlogin:hover{
+	background:#2ecc71;
+	color:white;
+	transition: 0.5s all ease;
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+    border-radius: 5px;
+}
+
+
+
+.banner{
+
+    background: #3498db;
+    padding: 5px;
+    margin-bottom: 40px;
+        
+
+}
+
+
+.registro{
+    display: flex;
+}
+
+
+.linkregistrar{
+    padding: 10px;
+}
+
+.recordar{
+    margin-left: 130px;
+}
+a{
+   color: #7f8c8d;
+}
+#linkregistrar:hover{
+    color:#16a085; 
+}
+#linkrecordar:hover{
+    color:#e74c3c; 
+}
+
+
+
+
+/*Diseño de Registro de Usuarios*/
+
+.contenido_registro{
+    max-width: 600px;
+    margin: 0 auto;
+    position:relative;
+}
+
+#caja_registro{
+    background: white;
+    padding: 40px;
+    margin: 200px 0;
+}
+
+#caja_registro h3{
+    color: white;
+    display: block;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 10px;
+    margin-left: 130px;
+}
+
+.textsregistro{
+    border: medium none !important;
+    margin: 0 0 10px;
+  /*  min-width: 100%;*/
+    padding: 0;
+   width: 100%;
+    
+}
+.registro2{
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+    font-size: 14px;
+    border:medium none !important;
+    margin: 0 0 10px;
+    min-width: 100%;
+    padding: 0;
+    width: 100%;
+}
+
+
+#caja_registro textarea{
+    height: 100px;
+    max-width: 100%;
+    resize: none;
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+}
+#caja_registro input{
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+    outline: none;
+    font-size: 16px;
+    color: #444343;
+    padding: 20px 30px 10px 10px;
+    margin: 0;
+    border: none;
+    border-bottom: 2px solid #cecfd3;
+    -webkit-appearance: none;
+    margin-bottom:5px;
+    
+}
+
+.content1{
+    display: flex;
+}
+.textusuario{
+        width: 95%;
+}
+
+.content2{
+    display: flex;
+}
+
+
+.botonregistro {
+    cursor: pointer;
+    margin: 0 0 5px;
+    width: 100%;
+    font-size: 18px;
+    color: white;
+    background:#e74c3c;
+    outline: none; 
+    padding: 6px 13px;
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+    padding: 10px;
+    border: none;
+    
+}
+
+.botonregistro:hover{
+	background:#3498db;
+	color:white;
+	transition: 0.5s all ease;
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+}
+#caja_registro input:hover{
+    border-bottom: 2px solid #f1c40f ;
+	transition: 0.5s all ease;
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+    
+}
+.iniciarsesion{
+    margin-left: 215px;
+}
+#link:hover{
+    color: #2980b9;
+}
+
+.caja_file{
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    border: 8px solid #fff;
+}
+
+.content{
+    position: relative;
+    text-align: center;
+}
+
+.contenido_espacio{
+    height: 250px;
+    
+}
+
+#file_cargar{
+    padding: 50px;
+}
+
+.btn_cargar{
+    cursor: pointer;
+    margin: 0 0 5px;
+    font-size: 15px;
+    color: white;
+    background:#f39c12;
+    outline: none; 
+    padding: 6px 13px;
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+    padding: 10px;
+    border: none;
+    
+
+}
+
+
+.btn_cargar:hover{
+    cursor: pointer;
+    margin: 0 0 5px;
+    font-size: 15px;
+    color: white;
+    background:#2ecc71;
+    outline: none; 
+    padding: 6px 13px;
+    font-family: "Open Sans",Helveltica,Arial,sans-serif;
+    padding: 10px;
+    border: none;
+    
+
+}

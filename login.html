@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    
+    <title>Login</title>
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+    <meta charset="utf-8" />
+    <script src="js/jquery-1.10.2.js"></script>
+
+</head>
+
+<body>
+    <div class="contenido">
+        
+    <form id="caja" role="form">
+        <div class="banner">
+                <h3>Juegos Go USAC</h3>
+        </div>
+        
+        <div class="texts">
+            <input id="mensaje_usuario"placeholder="Ingrese usuario" type="text" name="txtusuario">
+        </div>
+        <div class="texts">
+            <input placeholder="Ingrese contraseña" type="password" name="txtcontra">
+        </div>
+        <div class="texts">
+            <button class="botonlogin" type="submit">Iniciar Sesión</button>
+        </div>
+        
+        <div class="registro">
+        <div class="registrar">
+        <a href="registrar_usuario.html" style="text-decoration:none" id="linkregistrar"><h4>Registrarse</h4></a>
+        </div>
+        <div class="recordar">
+        <a href="recuperar_contrasena.html" style="text-decoration:none"  id="linkrecordar"><h4>¿Olvido su contraseña?</h4></a>
+            </div>
+        </div>
+        </form>
+    
+    </div>
+    <script>
+            $("#caja").submit(function(event) {
+                event.preventDefault();
+                var $form = $(this),
+                    user_name = $form.find("input[name='txtusuario']").val(),
+                    user_pass = $form.find("input[name='txtcontra']").val(),
+                    url = 'https://juegosgousac-backend.herokuapp.com/login';
+
+                var posting = $.post(url, {
+                    usuario_admin: user_name,
+                    contra_admin: user_pass
+                })
+
+                posting.done(function(data) {
+
+                    var content = $(data).find("#content");
+                    var respuesta = content['prevObject'][0]
+                    var usuario_ingresado=$("#mensaje_usuario").val();
+                    if (respuesta['res'] == 1) {
+                        window.alert("Bienvenido")
+                        window.location.href = "catalogojuegos.html";
+                    } else {
+                        alert("Error de usuario o contraseña")
+                    }
+                });
+            });
+        </script>
+
+
+</body>
+</html>

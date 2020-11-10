@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Catálogo</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+        <link rel="stylesheet" href="style/style_juegos.css" />
+        <link rel="stylesheet" href="style/style-xlarge.css" />
+	</head>
+	<body onload="CargarInfo()"  background-color="black">
+			<header id="header" class="skel-layers-fixed">
+				<nav id="nav">
+					<ul>
+						<li><a href="catalogojuegos.html">Catálogo de Videojuegos</a></li>
+						<li><a href="busqueda_realizada.html">Buscar</a></li>
+						<li><a href="biblioteca.html">Biblioteca</a></li>
+						<li><a href="perfil.html">Perfil</a></li>
+						<li><a href="cargamasiva.html">Carga Masiva</a></li>
+                        <li><a href="crud_videojuegos.html">CRUD de Videojuegos</a></li>
+                        <li><a href="reportes.html">Reportes</a></li>
+                        <li><a href="crear_admin.html">Crear Usuario</a></li>
+						<li><a href="login.html">Cerrar Sesión</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Main -->
+			<section id="main" class="wrapper style1">
+				
+				<header class="major">
+					<div id="contenido_baner">
+
+
+					</div>
+					<div class="contenido_espacio2"></div>
+					<h1>Detalles de Videojuego</h1>
+					
+				</header>
+				
+				<div class="container" id="juegos">
+
+					<div class="row" id="content_juegos">
+						
+					</div>
+				</div>
+			</section>
+
+
+			<footer id="footer">
+				<div class="container">
+					<div class="row double">
+						<div class="6u">
+							<div class="row collapse-at-2">
+								<div class="6u">
+								</div>
+								<div class="6u">
+								</div>
+							</div>
+						</div>
+						<div class="6u">
+						</div>
+					</div>
+					<ul class="copyright">
+						<li>Juegos GO USAC</li>
+						<li>2020</li>
+					</ul>
+				</div>
+			</footer>
+
+
+	<script>
+        function CargarInfo() {
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get('id')
+
+            fetch('https://juegosgousac-backend.herokuapp.com/cargar_descripcionJuegos?id='+id, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+            .catch(err => {
+                console.error('Error:', err)
+                alert("Error al mostrar el Juego")
+            })
+            .then(response => {
+                console.log(response)
+                var juegos = response['data'];
+                var detalles = document.querySelector('#content_juegos')
+				var baner=document.querySelector("#contenido_baner")
+				baner.innerHTML+=`	
+				<div class="contenido_baner">
+				<img src="${juegos['baner']}" width="100%" height="50%" alt="">
+						` 
+					detalles.innerHTML += ` 
+
+				<div id="contenedor_descJuego">
+
+					<div class="info_detalles">
+						<img src="${juegos['imagen']}" width="210px" height="320" alt="">
+						</div>
+
+
+					<div class="info_detalles2">
+						
+						<div id="info_nombre">
+							${juegos['nombre_juego']}
+							</div>
+
+						<div id="info_3categorias">
+							${juegos['categoria1']}-${juegos['categoria2']}-${juegos['categoria3']}
+						
+							</div>
+
+
+
+							<div id="info_anio">
+							Fecha de Lanzamiento: 	${juegos['anio']}
+							</div>
+
+							<div id="info_precio">
+							${juegos['precio']}
+							</div>
+
+						<div id="info_desc">
+							${juegos['desc']}
+
+						</div>
+
+						
+						
+					</div>	<!--Fin de Div info_detalles-->
+				</div><!--Fin de contenedor_descJuego-->
+						`
+                })
+        }
+    </script>	
+	</body>
+</html>

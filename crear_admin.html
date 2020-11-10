@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>CRUD de Videojuego</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+        <link rel="stylesheet" href="style/style_juegos.css" />
+        <link rel="stylesheet" href="style/style-xlarge.css" />
+	</head>
+	<body>
+			<header id="header" class="skel-layers-fixed">
+				<nav id="nav">
+					<ul>
+						<li><a href="catalogojuegos.html">Catálogo de Videojuegos</a></li>
+						<li><a href="busqueda_realizada.html">Buscar</a></li>
+						<li><a href="biblioteca.html">Biblioteca</a></li>
+						<li><a href="perfil.html">Perfil</a></li>
+						<li><a href="cargamasiva.html">Carga Masiva</a></li>
+                        <li><a href="crud_videojuegos.html">CRUD de Videojuegos</a></li>
+                        <li><a href="reportes.html">Reportes</a></li>
+                        <li><a href="crear_admin.html">Crear Usuario</a></li>
+						<li><a href="login.html">Cerrar Sesión</a></li>
+					</ul>
+				</nav>
+			</header>
+			<section id="main" class="wrapper style1">
+				<header class="major">
+					<h1>Administrador</h1>
+				</header>
+				<div class="contenido_crearjuego">
+
+                    <form id="registro_usuarios" method="POST">
+                    <div class="cont_nombrejuego">
+                        <input required id="txtnombreadmin" type="text" name="txtnombre_admin" placeholder="Ingrese Nombre ">
+                    </div> 
+                    <div  class="cont_aniojuego">
+                        <input required id="txtapellidoadmin" type="text" name="txtapellido_admin" placeholder="Ingrese Apellido">
+                    </div>
+                    <div class="cont_preciojuego">
+                        <input required id="txtusuarioadmin" type="text" name="txtusuario_admin" placeholder="Ingrese Usuario">
+                    </div>
+                    <div class="cont_cat1juego">
+                        <input required id="txtcontraadmin" type="text" name="txtcontra_admin" placeholder="Ingrese Contraseña">
+                    </div>
+                    <div class="btn_crearjuego">
+                        <button required id="btncrearjuego" type="submit">Crear Administrador</button> 
+                    </div>
+                </form>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<div class="row double">
+						<div class="6u">
+							<div class="row collapse-at-2">
+								<div class="6u">
+								</div>
+								<div class="6u">
+								</div>
+							</div>
+						</div>
+						<div class="6u">
+						</div>
+					</div>
+					<ul class="copyright">
+						<li>Juegos GO USAC</li>
+						<li>2020</li>
+					</ul>
+				</div>
+            </footer>
+            
+            <script>
+        $("#registro_usuarios").submit(function(event) {
+            event.preventDefault();
+
+            var $form = $(this),
+                txtnombre_admin = $form.find("input[name='txtnombre_admin']").val(),
+                txtapellido_admin=$form.find("input[name='txtapellido_admin']").val(),
+                txtusuario_admin= $form.find("input[name='txtusuario_admin']").val(),
+                txtcontra_admin= $form.find("input[name='txtcontra_admin']").val(),
+                url = 'https://juegosgousac-backend.herokuapp.com/registrar_usuarios';
+       
+            var posting = $.post(url, {
+                nombre_usuarioget: txtnombre_admin,
+                apellido_usuarioget: txtapellido_admin,
+                usuario_adminget: txtusuario_admin,
+                contra_get: txtcontra_admin
+            })
+
+            posting.done(function(data) {
+                var content = $(data).find("#content");
+                var respuesta = content['prevObject'][0]
+
+                    if (respuesta['guardado'] ==1) {
+                    alert("Administrador Guardado")
+                    document.getElementById("txtnombreadmin").value="";
+                    document.getElementById("txtapellidoadmin").value="";
+                    document.getElementById("txtusuarioadmin").value="";
+                    document.getElementById("txtcontraadmin").value="";
+                }else{
+                	alert("Error al guardar el Administrador")
+                }
+
+            });
+        });
+            </script>
+
+	</body>
+</html>

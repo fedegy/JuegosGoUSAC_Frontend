@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Crear Videojuego</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+        <link rel="stylesheet" href="style/style_juegos.css" />
+        <link rel="stylesheet" href="style/style-xlarge.css" />
+	</head>
+	<body>
+			<header id="header" class="skel-layers-fixed">
+				<nav id="nav">
+					<ul>
+						<li><a href="catalogojuegos.html">Catálogo de Videojuegos</a></li>
+						<li><a href="busqueda_realizada.html">Buscar</a></li>
+						<li><a href="biblioteca.html">Biblioteca</a></li>
+						<li><a href="perfil.html">Perfil</a></li>
+						<li><a href="cargamasiva.html">Carga Masiva</a></li>
+                        <li><a href="crud_videojuegos.html">CRUD de Videojuegos</a></li>
+                        <li><a href="reportes.html">Reportes</a></li>
+                        <li><a href="crear_admin.html">Crear Usuario</a></li>
+						<li><a href="login.html">Cerrar Sesión</a></li>
+					</ul>
+				</nav>
+			</header>
+			<section id="main" class="wrapper style1">
+				<header class="major">
+					<h1>Crear Videojuego</h1>
+				</header>
+				<div class="contenido_crearjuego">
+
+                    <form id="registro_juegos" method="POST">
+                    <div class="cont_nombrejuego">
+                        <input required id="txtnombrejuego" type="text" name="txtnombre_juego" placeholder="Ingrese Nombre de Juego">
+                    </div> 
+                    <div  class="cont_aniojuego">
+                        <input required id="txtaniojuego" type="text" name="txtanio_juego" placeholder="Ingrese Año">
+                    </div>
+                    <div class="cont_preciojuego">
+                        <input required id="txtpreciojuego" type="text" name="txtprecio_juego" placeholder="Ingrese Precio">
+                    </div>
+                    <div class="cont_cat1juego">
+                        <input required id="txtcategoria1juego" type="text" name="txtcategoria1_juego" placeholder="Ingrese Categoría 1">
+                    </div>
+                    <div class="cont_cat2juego">
+                        <input required id="txtcategoria2juego" type="text" name="txtcategoria2_juego" placeholder="Ingrese Categoría 2">
+                    </div>
+                    <div class="cont_cat3juego">
+                        <input id="txtcategoria3juego" type="text" name="txtcategoria3_juego" placeholder="Ingrese Categoría 3">
+                    </div>
+                    <div class="cont_fotojuego">
+                        <input required id="txtfotojuego" type="text" name="txtfoto_juego" placeholder="Ingrese Foto">
+                    </div>
+                    <div class="cont_banerjuego">
+                        <input required id="txtbanerjuego" type="text" name="txtbaner_juego" placeholder="Ingrese Banner">
+                    </div>
+                    <div class="cont_descjuego">
+                        <input required id="txtdesjuego" type="text" name="txtdes_juego" placeholder="Ingrese Descripción">
+                    </div>
+                    <div class="btn_crearjuego">
+                        <button required id="btncrearjuego" type="submit">Crear Juego</button> 
+                    </div>
+                </form>
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<div class="row double">
+						<div class="6u">
+							<div class="row collapse-at-2">
+								<div class="6u">
+								</div>
+								<div class="6u">
+								</div>
+							</div>
+						</div>
+						<div class="6u">
+						</div>
+					</div>
+					<ul class="copyright">
+						<li>Juegos GO USAC</li>
+						<li>2020</li>
+					</ul>
+				</div>
+            </footer>
+            
+            <script>
+                $("#registro_juegos").submit(function(event) {
+            event.preventDefault();
+
+            var $form = $(this),
+                txtnombrejuego=$form.find("input[name='txtnombre_juego']").val(),
+                txtaniojuego=$form.find("input[name='txtanio_juego']").val(),
+                txtpreciojuego=$form.find("input[name='txtprecio_juego']").val(),
+                txtcat1juego=$form.find("input[name='txtcategoria1_juego']").val(),
+                txtcat2juego=$form.find("input[name='txtcategoria2_juego']").val(),
+                txtcat3juego=$form.find("input[name='txtcategoria3_juego']").val(),
+                txtfotojuego=$form.find("input[name='txtfoto_juego']").val(),
+                txtbanerjuego=$form.find("input[name='txtbaner_juego']").val(),
+                txtdescjuego=$form.find("input[name='txtdes_juego']").val(),
+                url = 'https://juegosgousac-backend.herokuapp.com/crear_nuevo_videojuego';
+       
+            var posting = $.post(url, {
+                nombre_juegoget:txtnombrejuego,
+                anio_juegoget:txtaniojuego,
+                precio_juegoget:txtpreciojuego,
+                categoria1_juegoget:txtcat1juego,
+                categoria2_juegoget:txtcat2juego,
+                categoria3_juegoget:txtcat3juego,
+                foto_juegoget:txtfotojuego,
+                baner_juegoget:txtbanerjuego,
+                desc_juegoget:txtdescjuego
+            })
+
+            posting.done(function(data) {
+                var content = $(data).find("#content");
+                var respuesta = content['prevObject'][0]
+
+                    if (respuesta['juegocreado'] ==1) {
+                    alert("Registro Guardado")
+                    document.getElementById("txtnombrejuego").value="";
+                    document.getElementById("txtaniojuego").value="";
+                    document.getElementById("txtpreciojuego").value="";
+                    document.getElementById("txtcategoria1juego").value="";
+                    document.getElementById("txtcategoria2juego").value="";
+                    document.getElementById("txtcategoria3juego").value="";
+                    document.getElementById("txtfotojuego").value="";
+                    document.getElementById("txtbanerjuego").value="";
+                    document.getElementById("txtdesjuego").value="";
+                }else{
+                    window.alert("No se guardo el juego ingresado")
+                }
+
+            });
+        });
+
+
+
+            </script>
+
+	</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Búsqueda Realizada</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+        <link rel="stylesheet" href="style/style_juegos.css" />
+        <link rel="stylesheet" href="style/style-xlarge.css" />
+	</head>
+	<body background-color="black">
+			<header id="header" class="skel-layers-fixed">
+				<nav id="nav">
+					<ul>
+						<li><a href="catalogojuegos.html">Catálogo de Videojuegos</a></li>
+						<li><a href="busqueda_realizada.html">Buscar</a></li>
+						<li><a href="biblioteca.html">Biblioteca</a></li>
+						<li><a href="perfil.html">Perfil</a></li>
+						<li><a href="cargamasiva.html">Carga Masiva</a></li>
+                        <li><a href="crud_videojuegos.html">CRUD de Videojuegos</a></li>
+                        <li><a href="reportes.html">Reportes</a></li>
+                        <li><a href="crear_admin.html">Crear Usuario</a></li>
+						<li><a href="login.html">Cerrar Sesión</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<section id="main" class="wrapper style1">
+				<header class="major">
+					<h1>Buscar Videojuego</h1>
+					<input type="search" placeholder="Buscar Juego" id="txtbuscar">
+					<button type="button" id="boton_buscar" onclick="BuscarJuego()">Buscar</button>
+				</header>
+				<div id="contenido_titulo"></div>
+				<div class="container">
+
+					<div class="row" id="juegos2">
+
+				
+
+					</div>
+				</div>
+				<div class="contenido_espacio4"></div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<div class="row double">
+						<div class="6u">
+							<div class="row collapse-at-2">
+								<div class="6u">
+								</div>
+								<div class="6u">
+								</div>
+							</div>
+						</div>
+						<div class="6u">
+						</div>
+					</div>
+					<ul class="copyright">
+						<li>Juegos GO USAC</li>
+						<li>2020</li>
+					</ul>
+				</div>
+			</footer>
+
+
+			<script>
+
+            
+			function BuscarJuego() {
+            
+            const categoria_ingresada=$("#txtbuscar").val()
+
+            fetch('https://juegosgousac-backend.herokuapp.com/busqueda_de_juegos?categoria1='+categoria_ingresada, {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json'
+            }
+            }).then(res => res.json())
+            .catch(err => {
+                console.error('Error:', err)
+                alert("Error al mostrar la contraseña")
+            })
+            .then(response => {
+			console.log(response)
+			
+                var juegos= response['buscado'];
+                var contenido_titulo=document.querySelector('#contenido_titulo')
+				var detalles = document.querySelector('#juegos2')
+
+				contenido_titulo.innerHTML += `
+					<h1>Juego Buscado: ${juegos.nombre_juego}</h1>
+				`
+
+                detalles.innerHTML+=`
+
+				<a href="detalles_juegos.html?id=${juegos['id']}"><div class="special box">
+															<div>
+										
+								<img class="imagen_juegos" src=${juegos.imagen} height="300"width="200">
+								<div class="pos_categorias">
+								${juegos.categoria1}-${juegos.categoria2}
+								</div>
+								<div class="pos_nombre">
+								${juegos.nombre_juego}
+								</div>
+								<div class="pos_precio">
+								${juegos.precio}
+								</div>
+								</div>
+								</div></a>
+				`   
+            })
+            }
+            
+            </script>
+		
+	</body>
+</html>
+
+
+
+
+
+

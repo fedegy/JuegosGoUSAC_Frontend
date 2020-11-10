@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Reportes</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+        <link rel="stylesheet" href="style/style_juegos.css" />
+		<link rel="stylesheet" href="style/style-xlarge.css" />
+		<script src="js/jspdf.debug.js"></script>
+		<script src="js/html2pdf.js"></script>
+		<script src="js/html2canvas.js"></script>
+		<script src="js/html2pdf.bundle.min.js"></script>
+	</head>
+	<body onload="Tabla_juegos()">
+			<header id="header" class="skel-layers-fixed">
+				<nav id="nav">
+					<ul>
+						<li><a href="catalogojuegos.html">Catálogo de Videojuegos</a></li>
+						<li><a href="busqueda_realizada.html">Buscar</a></li>
+						<li><a href="biblioteca.html">Biblioteca</a></li>
+						<li><a href="perfil.html">Perfil</a></li>
+						<li><a href="cargamasiva.html">Carga Masiva</a></li>
+                        <li><a href="crud_videojuegos.html">CRUD de Videojuegos</a></li>
+                        <li><a href="reportes.html">Reportes</a></li>
+                        <li><a href="crear_admin.html">Crear Usuario</a></li>
+						<li><a href="login.html">Cerrar Sesión</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<section id="main" class="wrapper style1">
+				<header class="major">
+					<h1>Reporte de Videojuegos</h1>
+				</header>
+				<div class="container">
+
+					<div class="row" id="reportes_juegos">
+						<table class="table" id="tabla_reporteJuegos">
+							<thead>
+								<tr>
+								<th>No.</th>
+								<th>Nombre</th>
+								<th>Año</th>
+								<th>Precio</th>
+								<th>Categoria 1</th>
+								<th>Categoria 2</th>
+								<th>Categoria 3</th>
+								<th class="foto_">Foto</th>
+								<th>Banner</th>
+								<th>Descripción</th>
+								</tr>
+							</thead>
+							<tbody id="tabla_juegos">
+							</tbody>
+						</table>
+
+					</div>
+
+				<div class="boton_generarJuego">
+					<button type="button" id="generarPDF_Juegos" onclick="GenerarReporte()">Generar PDF</button>
+				</div>
+				</div>
+			</section> 
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<div class="row double">
+						<div class="6u">
+							<div class="row collapse-at-2">
+								<div class="6u">
+								</div>
+								<div class="6u">
+								</div>
+							</div>
+						</div>
+						<div class="6u">
+						</div>
+					</div>
+					<ul class="copyright">
+						<li>Juegos GO USAC</li>
+						<li>2020</li>
+					</ul>
+				</div>
+			</footer>
+			<script>
+				function Tabla_juegos(){
+            var contenido = document.querySelector('#tabla_juegos') 
+            contenido.innerHTML = ""
+            fetch('https://juegosgousac-backend.herokuapp.com/cargar_listajuegos')
+            .then(response => response.json())
+            .catch(error => {
+            console.log(error)
+            })
+            .then(juegos=> {
+            for (var i in juegos) {
+                console.log(juegos[i])
+                contenido.innerHTML += 
+                `<tr>
+				<td>${juegos[i].id}</td>
+                <td>${juegos[i].nombre_juego}</td>
+                <td>${juegos[i].anio}</td>
+                <td>${juegos[i].precio}</td>
+                <td>${juegos[i].categoria1}</td>
+				<td>${juegos[i].categoria2}</td>
+				<td>${juegos[i].categoria3}</td>
+				<td>${juegos[i].imagen}</td>
+				<td>${juegos[i].baner}</td>
+				<td>${juegosi].desc}</td>
+                </tr>`
+            }
+            })
+		}
+		function pdf(){
+			var pdf = new jsPDF('p', 'pt', 'letter');
+		var canvas = pdf.canvas;
+		
+        html2pdf(document.getElementById("reportes_juegos"), pdf, function(pdf) {
+                var iframe = document.createElement('iframe');
+                iframe.setAttribute('style','position:absolute;right:0; top:100; bottom:0; height:100%; width:1000px');
+                document.body.appendChild(iframe);
+                iframe.src = pdf.output('datauristring');
+
+            
+			
+				var div = document.createElement('pre');
+				div.innerText=pdf.output();
+				document.body.appendChild(div);
+            }	
+        );
+		}
+		function GenerarReporte(){
+			var tabla=document.getElementById('tabla_reporteJuegos');
+			var contenido_juegos={
+				margin:0.5,
+				filename: 'Reporte_Juegos.pdf',
+				pagebreak:{mode:['css','legacy']},
+				image:{type: 'jpeg',quality:0.98},
+				html2canvas:{scale:2},
+				jsPDF:{unit: 'cm',format:'legal',orientation:'landscape'}
+			};
+			html2pdf().set(contenido_juegos).from(tabla).save();
+			html2pdf(tabla,contenido_juegos);
+		}
+
+        </script>
+		
+	</body>
+</html>

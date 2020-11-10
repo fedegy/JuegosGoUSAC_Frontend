@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    
+    <title>Registrar Usuario</title>
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+    <meta charset="utf-8" />
+    <script src="js/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div class="contenido_registro">
+        
+    <form id="caja_registro">
+        <div class="banner">
+                <h3>Juegos Go USAC</h3>
+        </div>
+        
+        <div class="content1">
+          <div class="textsregistro">
+            <input id="nombre_registrado"name="txtnombre" placeholder="Nombre" type="text">
+        </div>
+        <div class="textsregistro">
+            <input id="apellido_registrado" name="txtapellido"placeholder="Apellido" type="text">
+        </div>
+        </div>
+        <div>
+            <input  id="usuario_registrado"name="txtusuario" class="textusuario" placeholder="Usuario" type="text">
+        </div>
+        
+        <div class="content2">
+         <div class="textsregistro">
+            <input id="txtcontras1"name="txtcontra1"placeholder="Contraseña" type="password">
+        </div>
+            
+        <div class="textsregistro">
+            <input id="txtcontras2"name="txtcontra2" placeholder="Confirmar Contraseña" type="password">
+        </div>
+
+        </div>
+       
+        
+        <div class="textsregistro">
+            <button name="submit" id="registrado"class="botonregistro" type="submit">Registrarse</button>
+        </div>
+        
+        <div class="registro2">
+            
+        <div class="iniciarsesion">
+        <a href="login.html" style="text-decoration:none" id="link"><h4>Iniciar Sesión</h4></a>
+        </div>
+        </div>
+        </form>
+    
+    </div>
+
+    <script>
+        $("#caja_registro").submit(function(event) {
+            event.preventDefault();
+
+            var $form = $(this),
+                txtnombre = $form.find("input[name='txtnombre']").val(),
+                txtapellido=$form.find("input[name='txtapellido']").val(),
+                txtusuario= $form.find("input[name='txtusuario']").val(),
+                txtcontra1= $form.find("input[name='txtcontra1']").val(),
+                url = 'https://juegosgousac-backend.herokuapp.com/registrar_usuarios';
+       
+            var posting = $.post(url, {
+                nombre_usuarioget: txtnombre,
+                apellido_usuarioget: txtapellido,
+                usuario_adminget: txtusuario,
+                contra_get: txtcontra1
+            })
+
+            posting.done(function(data) {
+                var content = $(data).find("#content");
+                var respuesta = content['prevObject'][0]
+
+                var contras1=$("#txtcontras1").val();
+                var contras2=$("#txtcontras2").val();
+
+                if(contras1==contras2){
+                    if (respuesta['guardado'] ==1) {
+                    alert("Se registro correctamente")
+                    document.getElementById("nombre_registrado").value="";
+                    document.getElementById("apellido_registrado").value="";
+                    document.getElementById("usuario_registrado").value="";
+                    document.getElementById("txtcontras1").value="";
+                    document.getElementById("txtcontras2").value="";
+                } 
+                }else{
+                    window.alert("La contraseña no coincide")
+                }
+
+            });
+        });
+
+    </script>
+
+
+
+
+
+    
+</body>
+</html>

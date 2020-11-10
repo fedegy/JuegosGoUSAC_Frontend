@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Eliminar Videojuegos</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+        <link rel="stylesheet" href="style/style_juegos.css" />
+        <link rel="stylesheet" href="style/style-xlarge.css" />
+	</head>
+	<body onload="Tabla_eliminarjuegos()">
+			<header id="header" class="skel-layers-fixed">
+				<nav id="nav">
+					<ul>
+						<li><a href="catalogojuegos.html">Catálogo de Videojuegos</a></li>
+						<li><a href="busqueda_realizada.html">Buscar</a></li>
+						<li><a href="biblioteca.html">Biblioteca</a></li>
+						<li><a href="perfil.html">Perfil</a></li>
+						<li><a href="cargamasiva.html">Carga Masiva</a></li>
+                        <li><a href="crud_videojuegos.html">CRUD de Videojuegos</a></li>
+                        <li><a href="reportes.html">Reportes</a></li>
+                        <li><a href="crear_admin.html">Crear Usuario</a></li>
+						<li><a href="login.html">Cerrar Sesión</a></li>
+					</ul>
+				</nav>
+			</header>
+			<section id="main" class="wrapper style1">
+				<header class="major">
+					<h1>Eliminar Videojuego</h1>
+				</header>
+				<div class="contenido_eliminarjuego">
+                    <div id="cont_inputEliminar">
+                    <form id="registro_juegos" method="POST">
+                    <div class="cont_eliminarid">
+                        <input required id="txtid_eliminarjuego" type="text" name="txtideliminar_juego" placeholder="Ingrese ID a eliminar">
+                    </div>
+                    <div class="btn_eliminarjuego">
+                        <button type="submit" id="btneliminarjuego">Eliminar Videojuego</button>
+                    </div>
+                </form>
+            </div>
+                <div class="eliminar_table">
+                <table class="table_eliminar">
+                    <thead>
+                        <tr>
+                        <th>No.</th>
+                        <th>Nombre</th>
+                        <th>Foto</th>
+                        <th>Banner</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla_eliminarjuego">
+                    </tbody>
+                </table>
+            </div>
+				</div>
+			</section>
+
+			<footer id="footer">
+				<div class="container">
+					<div class="row double">
+						<div class="6u">
+							<div class="row collapse-at-2">
+								<div class="6u">
+								</div>
+								<div class="6u">
+								</div>
+							</div>
+						</div>
+						<div class="6u">
+						</div>
+					</div>
+					<ul class="copyright">
+						<li>Juegos GO USAC</li>
+						<li>2020</li>
+					</ul>
+				</div>
+            </footer>           
+            <script>
+            $("#registro_juegos").submit(function(event) {
+            event.preventDefault();
+
+            var $form = $(this),
+                txtidjuego_eliminado=$form.find("input[name='txtideliminar_juego']").val(),
+                url = 'https://juegosgousac-backend.herokuapp.com/eliminar_juego';
+       
+            var posting = $.post(url, {
+                idjuego_elimget:txtidjuego_eliminado
+            })
+
+            posting.done(function(data) {
+                var content = $(data).find("#content");
+                var respuesta = content['prevObject'][0]
+
+                    if (respuesta['eliminado'] ==1) {
+                    alert("Videojuego Eliminado con éxito")
+                    document.getElementById("txtid_eliminarjuego").value="";
+                    Tabla_eliminarjuegos();
+                }else{
+                    window.alert("No se elimino el Videojuego")
+                }
+            });
+        });
+
+        function Tabla_eliminarjuegos(){
+            var contenido = document.querySelector('#tabla_eliminarjuego') 
+            contenido.innerHTML = ""
+            fetch('https://juegosgousac-backend.herokuapp.com/cargar_listajuegos')
+            .then(response => response.json())
+            .catch(error => {
+            console.log(error)
+            })
+            .then(res => {
+            for (var i in res) {
+                console.log(res[i])
+                contenido.innerHTML += 
+                `<tr>
+                <td>${res[i].id}</td>
+                <td>${res[i].nombre_juego}</td>
+				<td><img src="${res[i].imagen}" width="50px" height="70px" alt=""></td>
+				<td><img src="${res[i].baner}" width="100px" height="30px"></td>
+                </tr>`
+            }
+            })
+		}
+        </script>
+	</body>
+</html>

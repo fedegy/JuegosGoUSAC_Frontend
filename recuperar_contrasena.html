@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    
+    <title>Recuperar Contraseña</title>
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+    <meta charset="utf-8" />
+    <script src="js/jquery-1.10.2.js"></script>
+</head>
+<body>
+    <div id="usuarios1"></div>
+    <div class="contenido" id="users">
+        
+    <form id="caja" role="form">
+        <div class="banner">
+                <h3>Juegos Go USAC</h3>
+        </div>
+        <div id="users">
+
+        </div>
+        
+        <div class="texts">
+            <input id="mensaje_usuario"placeholder="Ingrese usuario" type="text">
+        </div>
+        <div class="texts">
+            <button class="botonlogin" type="button"   onclick="RecuperarContra()" id="contra">Recuperar Contraseña</button>
+        </div>     
+        <div class="registro">
+        <div class="recordar">
+        <a  href="login.html"style="text-decoration:none" id="linkrecordar"><h4>Iniciar Sesión</h4></a>
+            </div>
+        </div>
+        </form>
+    </div>
+	<script>
+
+        function RecuperarContra() {
+            
+            const usuario_ingresado=$("#mensaje_usuario").val()
+
+            fetch('https://juegosgousac-backend.herokuapp.com/recuperar_contrasena?usuario='+usuario_ingresado, {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json'
+            }
+            }).then(res => res.json())
+            .catch(err => {
+                console.error('Error:', err)
+                alert("Error al mostrar la contraseña")
+            })
+            .then(response => {
+            console.log(response)
+                var contrasena= response['recuperar'];
+                window.innerHTML+=`${alert(contrasena['contra'])}`   
+            })
+            }
+
+    </script>
+    </script>
+</body>
+</html>
