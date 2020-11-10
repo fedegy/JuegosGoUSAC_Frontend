@@ -1638,3 +1638,33 @@ table td.r, table th.r {
 	padding-left: 27%;
 }
 
+#txtnombreadmin{
+	border: 1px solid rgb(150,150,150);
+	height: 40px;
+	border-radius: 2px;
+	width: 40%;
+	background-color: white;
+}
+
+#txtapellidoadmin{
+	border: 1px solid rgb(150,150,150);
+	height: 40px;
+	border-radius: 2px;
+	width: 40%;
+	background-color: white;
+}
+
+#txtusuarioadmin{
+	border: 1px solid rgb(150,150,150);
+	height: 40px;
+	border-radius: 2px;
+	width: 40%;
+	background-color: white;
+}
+#txtcontraadmin{
+	border: 1px solid rgb(150,150,150);
+	height: 40px;
+	border-radius: 2px;
+	width: 40%;
+	background-color: white;
+}
