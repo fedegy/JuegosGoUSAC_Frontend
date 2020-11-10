@@ -88,7 +88,7 @@
 			</footer>
 			<script>
 				function Tabla_juegos(){
-            var contenido = document.querySelector('#tabla_reporteJuegos') 
+            var contenido = document.querySelector('#tabla_juegos') 
             contenido.innerHTML = ""
             fetch('https://juegosgousac-backend.herokuapp.com/cargar_listajuegos')
             .then(response => response.json())
@@ -114,24 +114,7 @@
             }
             })
 		}
-		function pdf(){
-			var pdf = new jsPDF('p', 'pt', 'letter');
-		var canvas = pdf.canvas;
-		
-        html2pdf(document.getElementById("reportes_juegos"), pdf, function(pdf) {
-                var iframe = document.createElement('iframe');
-                iframe.setAttribute('style','position:absolute;right:0; top:100; bottom:0; height:100%; width:1000px');
-                document.body.appendChild(iframe);
-                iframe.src = pdf.output('datauristring');
 
-            
-			
-				var div = document.createElement('pre');
-				div.innerText=pdf.output();
-				document.body.appendChild(div);
-            }	
-        );
-		}
 		function GenerarReporte(){
 			var tabla=document.getElementById('tabla_reporteJuegos');
 			var contenido_juegos={
